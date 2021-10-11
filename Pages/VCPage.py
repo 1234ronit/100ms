@@ -1,5 +1,5 @@
 from time import sleep
-
+import pyautogui as P
 from selenium.webdriver import ActionChains
 from selenium.webdriver.chrome import webdriver
 from selenium.webdriver.common.alert import Alert
@@ -13,6 +13,8 @@ class VCPage(BasePage):
 
     NAME = (By.XPATH, "/html/body/div[1]/div/div[2]/div/div/div[1]/div/div[4]/input")
     JOIN = (By.XPATH, "/html/body/div[1]/div/div[2]/div/div/div[1]/div/button")
+
+    MUTE_BUTTON_AT_JOIN_CONF = (By.XPATH, "/html/body/div[1]/div/div[2]/div/div/div[1]/div/div[1]/div/div/div[2]/div[1]/button[1]")
 
     VIDEO_BUTTON = (By.XPATH, "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[3]/div[1]/div[1]/div[3]/div[1]/button[1]/*[name()='svg'][1]/*[name()='path'][1]")
     VIDEO_1 = (By.XPATH, "/html/body/div[5]/div[3]/ul/li/div[2]/div/div[2]/div[1]")
@@ -39,6 +41,9 @@ class VCPage(BasePage):
 
     ACCEPT_BUTTON_AT_HOST = (By.XPATH, "/html/body/div[1]/div/div[2]/div/div[4]/div/div/div/div/div[3]/div/button")
 
+    SCREEN_SHARE_CONF_MESSAGE = (By.XPATH, "/html/body/div[1]/div/div[2]/div/div[2]/div[1]/div[1]/div/div/div/h1")
+    SCREEN_SHARE_CONF_NOTIFICATION = (By.XPATH, "/html/body/div[1]/div/div[2]/div/div[2]/div[3]/div/div/div[1]/div/div[1]/span")
+
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -48,6 +53,7 @@ class VCPage(BasePage):
         #result = self.is_visible(self.VIDEO)
         #self.do_click(self.JOIN)
         sleep(5)
+        self.do_click(self.MUTE_BUTTON_AT_JOIN_CONF)
         self.do_send_keys(self.NAME, username)
         self.do_click(self.JOIN)
         sleep(5)
@@ -84,13 +90,14 @@ class VCPage(BasePage):
 
     def start_screen_share(self):
         self.do_click(self.SCREEN_SHARE_BUTTON)
+        P.moveTo(650, 350)
+        P.rightClick()
         sleep(5)
-        #alert = self.driver.switch_to.alert
-        #alert.accept()
-        action = ActionChains(self.driver)
-        action.move_by_offset(550,250)
-        action.click()
+        P.moveTo(1200, 710)
+        P.rightClick()
         sleep(5)
+        if (self.is_visible(self.SCREEN_SHARE_CONF_MESSAGE)):
+            return self.get_elements_text(self.SCREEN_SHARE_CONF_MESSAGE)
 
     def change_roll_from_host_to_get(self):
         sleep(5)
@@ -103,5 +110,7 @@ class VCPage(BasePage):
 
     def accept_change_roll_at_host(self):
         self.do_click(self.ACCEPT_BUTTON_AT_HOST)
+        if (self.is_visible(self.SCREEN_SHARE_CONF_NOTIFICATION)):
+            return self.get_elements_text(self.SCREEN_SHARE_CONF_NOTIFICATION)
 
 

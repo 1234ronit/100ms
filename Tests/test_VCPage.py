@@ -21,11 +21,13 @@ class Test_VC(BaseTest):
 
     def test_video_playback(self):
         self.test_vc_page_video_conf()
-        self.vcPage.get_video_playback()
+        flag = self.vcPage.get_video_playback()
+        assert flag
 
     def test_audio_playback(self):
         self.test_vc_page_video_conf()
-        self.vcPage.get_audio_playback()
+        flag = self.vcPage.get_audio_playback()
+        assert flag
 
     def test_peer_list(self):
         self.test_vc_page_video_conf()
@@ -34,7 +36,8 @@ class Test_VC(BaseTest):
         self.homePage.do_start_video_conf()
         self.driver.switch_to.window(self.driver.window_handles[2])
         self.vcPage.do_join_video_conf(TestData.GUEST_1)
-        self.vcPage.get_peerlist()
+        flag = self.vcPage.get_peerlist()
+        assert flag
 
     def test_text_message(self):
         self.test_vc_page_video_conf()
@@ -63,14 +66,15 @@ class Test_VC(BaseTest):
         self.vcPage.change_roll_from_host_to_get()
 
         self.driver.switch_to.window(self.driver.window_handles[2])
-        self.vcPage.accept_change_roll_at_host()
-        sleep(5)
+        receiver = self.vcPage.accept_change_roll_at_host()
+        assert receiver == TestData.SCREEN_SHARE_CONF_NOTIFICATION
 
 
     """not able to select screen share option"""
     def test_screen_share(self):
         self.test_vc_page_video_conf()
-        self.vcPage.start_screen_share()
+        receiver = self.vcPage.start_screen_share()
+        assert receiver == TestData.SCREEN_SHARE_CONF_MESSAGE
 
 
 

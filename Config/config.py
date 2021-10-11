@@ -14,3 +14,6 @@ class TestData:
     HOME_PAGE_ACCOUNT= "1234ronit@gmail.com"
 
     TEXT_MESSAGE = "I AM HOST"
+
+    SCREEN_SHARE_CONF_MESSAGE = "You are sharing your screen"
+    SCREEN_SHARE_CONF_NOTIFICATION = "You are now a guest."
