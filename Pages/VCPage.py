@@ -94,10 +94,11 @@ class VCPage(BasePage):
         P.rightClick()
         sleep(5)
         P.moveTo(1200, 710)
-        P.rightClick()
+        #P.rightClick()
+        P.doubleClick()
         sleep(5)
         if (self.is_visible(self.SCREEN_SHARE_CONF_MESSAGE)):
-            return self.get_elements_text(self.SCREEN_SHARE_CONF_MESSAGE)
+           return self.get_elements_text(self.SCREEN_SHARE_CONF_MESSAGE)
 
     def change_roll_from_host_to_get(self):
         sleep(5)

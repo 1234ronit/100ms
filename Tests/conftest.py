@@ -26,5 +26,5 @@ def init_driver(request):
         web_driver = webdriver.Chrome(executable_path=TestData.CHROME_EXECUTABLE_PATH, chrome_options=options)
     request.cls.driver = web_driver
     yield
-    #web_driver.close()
-    #web_driver.quit()
+    web_driver.close()
+    web_driver.quit()

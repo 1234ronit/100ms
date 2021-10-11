@@ -70,7 +70,6 @@ class Test_VC(BaseTest):
         assert receiver == TestData.SCREEN_SHARE_CONF_NOTIFICATION
 
 
-    """not able to select screen share option"""
     def test_screen_share(self):
         self.test_vc_page_video_conf()
         receiver = self.vcPage.start_screen_share()
